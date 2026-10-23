@@ -1,0 +1,93 @@
+{
+  "image_id": "TVIC50_C010_smeared_text",
+  "source_id": "TVIC50",
+  "label": "smeared_text",
+  "capture_group": "TVIC50_C010",
+  "capture": {
+    "profile": "aoi",
+    "angle_deg": -0.2,
+    "scale": 0.982,
+    "tx": -5.2,
+    "ty": -1.1,
+    "gain": 0.944,
+    "gamma": 1.088,
+    "bias": -1.9,
+    "blur": 0.19,
+    "noise": 1.8
+  },
+  "split": "val",
+  "pm_split": "train",
+  "marking_technology": "laser",
+  "roi_xyxy": [
+    167,
+    11,
+    463,
+    307
+  ],
+  "component_classes": [
+    "smeared_text"
+  ],
+  "instances": [
+    {
+      "class": "smeared_text",
+      "component": 0,
+      "instance": 0,
+      "bbox_xyxy": [
+        343,
+        146,
+        373,
+        171
+      ],
+      "area": 593,
+      "contrast": 79.9,
+      "visible": true,
+      "polygon": [
+        371.0,
+        150.0,
+        365.0,
+        146.0,
+        361.0,
+        146.0,
+        358.0,
+        149.0,
+        356.0,
+        147.0,
+        350.0,
+        147.0,
+        343.0,
+        153.0,
+        344.0,
+        157.0,
+        343.0,
+        158.0,
+        343.0,
+        165.0,
+        351.0,
+        170.0,
+        354.0,
+        168.0,
+        358.0,
+        169.0,
+        367.0,
+        168.0,
+        372.0,
+        163.0
+      ]
+    }
+  ],
+  "changed_px": 1247,
+  "seed": "13142237502420685758",
+  "components": [
+    {
+      "class": "smeared_text",
+      "mechanism": "overburn_melt",
+      "severity_label": "severe",
+      "severity_value": 1.0,
+      "mask_px": 894
+    }
+  ],
+  "image": "samples/images/val/TVIC50_C010_smeared_text.png",
+  "mask": "samples/masks/val/TVIC50_C010_smeared_text.png",
+  "clean_counterpart": "samples/images/val/TVIC50_C010_good.png",
+  "generator_version": "icmarkingsynthetic-generator-1.0"
+}

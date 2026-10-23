@@ -1,0 +1,107 @@
+{
+  "image_id": "TVIC58_C009_missing_text",
+  "source_id": "TVIC58",
+  "label": "missing_text",
+  "capture_group": "TVIC58_C009",
+  "capture": {
+    "profile": "low_resolution_grainy_aoi",
+    "angle_deg": 0.31,
+    "scale": 0.981,
+    "tx": -3.0,
+    "ty": 0.9,
+    "gain": 0.977,
+    "gamma": 0.948,
+    "bias": 3.3,
+    "blur": 0.12,
+    "noise": 7.4
+  },
+  "split": "train",
+  "pm_split": "train",
+  "marking_technology": "ink",
+  "roi_xyxy": [
+    169,
+    46,
+    465,
+    281
+  ],
+  "component_classes": [
+    "missing_text"
+  ],
+  "instances": [
+    {
+      "class": "missing_text",
+      "component": 0,
+      "instance": 0,
+      "bbox_xyxy": [
+        265,
+        121,
+        373,
+        146
+      ],
+      "area": 289,
+      "contrast": 70.8,
+      "visible": true,
+      "polygon": [
+        362.0,
+        121.0,
+        358.0,
+        128.0,
+        358.0,
+        135.0,
+        359.0,
+        136.0,
+        358.0,
+        140.0,
+        362.0,
+        145.0,
+        368.0,
+        145.0,
+        370.0,
+        144.0,
+        372.0,
+        140.0,
+        372.0,
+        137.0,
+        370.0,
+        137.0,
+        368.0,
+        140.0,
+        365.0,
+        139.0,
+        362.0,
+        130.0,
+        365.0,
+        124.0,
+        367.0,
+        125.0,
+        367.0,
+        127.0,
+        369.0,
+        129.0,
+        371.0,
+        129.0,
+        372.0,
+        128.0,
+        372.0,
+        122.0,
+        371.0,
+        121.0
+      ]
+    }
+  ],
+  "changed_px": 281,
+  "seed": "8614727820601720858",
+  "components": [
+    {
+      "class": "missing_text",
+      "mechanism": "ink_skip",
+      "severity_label": "medium",
+      "severity_value": 0.5,
+      "mask_px": 289
+    }
+  ],
+  "image": "samples/images/train/TVIC58_C009_missing_text.png",
+  "mask": "samples/masks/train/TVIC58_C009_missing_text.png",
+  "clean_counterpart": "samples/images/train/TVIC58_C009_good.png",
+  "generator_version": "icmarkingsynthetic-generator-1.0"
+}

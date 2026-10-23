@@ -1,0 +1,105 @@
+{
+  "image_id": "TVIC14_C016_scratch",
+  "source_id": "TVIC14",
+  "label": "scratch",
+  "capture_group": "TVIC14_C016",
+  "capture": {
+    "profile": "aoi",
+    "angle_deg": 1.28,
+    "scale": 1.009,
+    "tx": -1.8,
+    "ty": 2.9,
+    "gain": 1.097,
+    "gamma": 0.91,
+    "bias": -0.2,
+    "blur": 0.26,
+    "noise": 1.6
+  },
+  "split": "val",
+  "pm_split": "train",
+  "marking_technology": "laser",
+  "roi_xyxy": [
+    171,
+    9,
+    465,
+    317
+  ],
+  "component_classes": [
+    "scratch"
+  ],
+  "instances": [
+    {
+      "class": "scratch",
+      "component": 0,
+      "instance": 0,
+      "bbox_xyxy": [
+        212,
+        16,
+        370,
+        55
+      ],
+      "area": 1242,
+      "contrast": 83.8,
+      "visible": true,
+      "polygon": [
+        248.0,
+        19.0,
+        218.0,
+        20.0,
+        217.0,
+        22.0,
+        215.0,
+        20.0,
+        212.0,
+        21.0,
+        212.0,
+        23.0,
+        218.0,
+        27.0,
+        217.0,
+        29.0,
+        219.0,
+        29.0,
+        220.0,
+        31.0,
+        223.0,
+        31.0,
+        223.0,
+        29.0,
+        219.0,
+        26.0,
+        221.0,
+        23.0,
+        225.0,
+        26.0,
+        229.0,
+        26.0,
+        235.0,
+        29.0,
+        231.0,
+        34.0,
+        232.0,
+        36.0,
+        234.0,
+        36.0,
+        240.0,
+        30.0
+      ]
+    }
+  ],
+  "changed_px": 2070,
+  "seed": "11247682831473770790",
+  "components": [
+    {
+      "class": "scratch",
+      "mechanism": "abrasion_broad_scuff",
+      "severity_label": "medium",
+      "severity_value": 0.5,
+      "mask_px": 1257
+    }
+  ],
+  "image": "samples/images/val/TVIC14_C016_scratch.png",
+  "mask": "samples/masks/val/TVIC14_C016_scratch.png",
+  "clean_counterpart": "samples/images/val/TVIC14_C016_good.png",
+  "generator_version": "icmarkingsynthetic-generator-1.0"
+}

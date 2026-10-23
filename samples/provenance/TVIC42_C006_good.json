@@ -1,0 +1,36 @@
+{
+  "image_id": "TVIC42_C006_good",
+  "source_id": "TVIC42",
+  "label": "good",
+  "capture_group": "TVIC42_C006",
+  "capture": {
+    "profile": "aoi",
+    "angle_deg": -0.23,
+    "scale": 1.024,
+    "tx": 1.6,
+    "ty": 1.0,
+    "gain": 0.982,
+    "gamma": 1.074,
+    "bias": 0.8,
+    "blur": 0.54,
+    "noise": 3.6
+  },
+  "split": "train",
+  "pm_split": "train",
+  "marking_technology": "laser",
+  "roi_xyxy": [
+    196,
+    32,
+    449,
+    292
+  ],
+  "component_classes": [],
+  "instances": [],
+  "changed_px": 0,
+  "seed": "2426468404309624147",
+  "components": [],
+  "image": "samples/images/train/TVIC42_C006_good.png",
+  "mask": "samples/masks/train/TVIC42_C006_good.png",
+  "clean_counterpart": "samples/images/train/TVIC42_C006_good.png",
+  "generator_version": "icmarkingsynthetic-generator-1.0"
+}

@@ -1,0 +1,77 @@
+{
+  "image_id": "TVIC43_C014_missing_text",
+  "source_id": "TVIC43",
+  "label": "missing_text",
+  "capture_group": "TVIC43_C014",
+  "capture": {
+    "profile": "aoi",
+    "angle_deg": 0.1,
+    "scale": 1.022,
+    "tx": -2.8,
+    "ty": -1.5,
+    "gain": 0.916,
+    "gamma": 1.019,
+    "bias": 6.2,
+    "blur": 0.55,
+    "noise": 3.3
+  },
+  "split": "train",
+  "pm_split": "train",
+  "marking_technology": "laser",
+  "roi_xyxy": [
+    194,
+    47,
+    426,
+    265
+  ],
+  "component_classes": [
+    "missing_text"
+  ],
+  "instances": [
+    {
+      "class": "missing_text",
+      "component": 0,
+      "instance": 0,
+      "bbox_xyxy": [
+        298,
+        97,
+        316,
+        120
+      ],
+      "area": 209,
+      "contrast": 82.2,
+      "visible": true,
+      "polygon": [
+        299.0,
+        97.0,
+        298.0,
+        119.0,
+        314.0,
+        119.0,
+        315.0,
+        114.0,
+        306.0,
+        115.0,
+        304.0,
+        113.0,
+        304.0,
+        97.0
+      ]
+    }
+  ],
+  "changed_px": 185,
+  "seed": "14697181469218442840",
+  "components": [
+    {
+      "class": "missing_text",
+      "mechanism": "whole_char_loss",
+      "severity_label": "low",
+      "severity_value": 0.25,
+      "mask_px": 209
+    }
+  ],
+  "image": "samples/images/train/TVIC43_C014_missing_text.png",
+  "mask": "samples/masks/train/TVIC43_C014_missing_text.png",
+  "clean_counterpart": "samples/images/train/TVIC43_C014_good.png",
+  "generator_version": "icmarkingsynthetic-generator-1.0"
+}

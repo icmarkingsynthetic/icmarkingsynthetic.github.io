@@ -1,0 +1,107 @@
+{
+  "image_id": "TVIC18_C002_missing_text",
+  "source_id": "TVIC18",
+  "label": "missing_text",
+  "capture_group": "TVIC18_C002",
+  "capture": {
+    "profile": "aoi",
+    "angle_deg": -0.56,
+    "scale": 1.015,
+    "tx": 10.3,
+    "ty": -5.0,
+    "gain": 0.914,
+    "gamma": 1.059,
+    "bias": 4.9,
+    "blur": 0.57,
+    "noise": 3.5
+  },
+  "split": "train",
+  "pm_split": "train",
+  "marking_technology": "laser",
+  "roi_xyxy": [
+    180,
+    7,
+    480,
+    308
+  ],
+  "component_classes": [
+    "missing_text"
+  ],
+  "instances": [
+    {
+      "class": "missing_text",
+      "component": 0,
+      "instance": 0,
+      "bbox_xyxy": [
+        224,
+        184,
+        242,
+        209
+      ],
+      "area": 242,
+      "contrast": 78.3,
+      "visible": true,
+      "polygon": [
+        238.0,
+        184.0,
+        234.0,
+        184.0,
+        234.0,
+        187.0,
+        236.0,
+        189.0,
+        233.0,
+        192.0,
+        231.0,
+        192.0,
+        231.0,
+        196.0,
+        235.0,
+        197.0,
+        237.0,
+        201.0,
+        233.0,
+        204.0,
+        230.0,
+        204.0,
+        228.0,
+        199.0,
+        224.0,
+        199.0,
+        224.0,
+        205.0,
+        227.0,
+        208.0,
+        236.0,
+        208.0,
+        241.0,
+        205.0,
+        240.0,
+        204.0,
+        241.0,
+        203.0,
+        241.0,
+        196.0,
+        239.0,
+        194.0,
+        240.0,
+        186.0
+      ]
+    }
+  ],
+  "changed_px": 211,
+  "seed": "18288222200024451889",
+  "components": [
+    {
+      "class": "missing_text",
+      "mechanism": "whole_char_loss",
+      "severity_label": "low",
+      "severity_value": 0.25,
+      "mask_px": 242
+    }
+  ],
+  "image": "samples/images/train/TVIC18_C002_missing_text.png",
+  "mask": "samples/masks/train/TVIC18_C002_missing_text.png",
+  "clean_counterpart": "samples/images/train/TVIC18_C002_good.png",
+  "generator_version": "icmarkingsynthetic-generator-1.0"
+}

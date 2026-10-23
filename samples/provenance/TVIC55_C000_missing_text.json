@@ -1,0 +1,113 @@
+{
+  "image_id": "TVIC55_C000_missing_text",
+  "source_id": "TVIC55",
+  "label": "missing_text",
+  "capture_group": "TVIC55_C000",
+  "capture": {
+    "profile": "aoi",
+    "angle_deg": 1.16,
+    "scale": 1.027,
+    "tx": -2.2,
+    "ty": 3.6,
+    "gain": 1.063,
+    "gamma": 1.012,
+    "bias": 3.3,
+    "blur": 0.14,
+    "noise": 3.0
+  },
+  "split": "test",
+  "pm_split": "train",
+  "marking_technology": "laser",
+  "roi_xyxy": [
+    207,
+    61,
+    429,
+    278
+  ],
+  "component_classes": [
+    "missing_text"
+  ],
+  "instances": [
+    {
+      "class": "missing_text",
+      "component": 0,
+      "instance": 0,
+      "bbox_xyxy": [
+        247,
+        153,
+        289,
+        174
+      ],
+      "area": 449,
+      "contrast": 99.4,
+      "visible": true,
+      "polygon": [
+        275.0,
+        153.0,
+        275.0,
+        155.0,
+        277.0,
+        157.0,
+        276.0,
+        163.0,
+        282.0,
+        162.0,
+        284.0,
+        164.0,
+        283.0,
+        167.0,
+        281.0,
+        166.0,
+        276.0,
+        167.0,
+        276.0,
+        169.0,
+        278.0,
+        167.0,
+        279.0,
+        168.0,
+        279.0,
+        170.0,
+        277.0,
+        171.0,
+        278.0,
+        172.0,
+        285.0,
+        172.0,
+        288.0,
+        168.0,
+        288.0,
+        161.0,
+        287.0,
+        159.0,
+        281.0,
+        157.0,
+        283.0,
+        155.0,
+        286.0,
+        155.0,
+        286.0,
+        153.0,
+        278.0,
+        153.0,
+        277.0,
+        154.0
+      ]
+    }
+  ],
+  "changed_px": 378,
+  "seed": "11147298498849292701",
+  "components": [
+    {
+      "class": "missing_text",
+      "mechanism": "whole_char_loss",
+      "severity_label": "high",
+      "severity_value": 0.75,
+      "mask_px": 449
+    }
+  ],
+  "image": "samples/images/test/TVIC55_C000_missing_text.png",
+  "mask": "samples/masks/test/TVIC55_C000_missing_text.png",
+  "clean_counterpart": "samples/images/test/TVIC55_C000_good.png",
+  "generator_version": "icmarkingsynthetic-generator-1.0"
+}

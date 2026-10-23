@@ -1,0 +1,107 @@
+{
+  "image_id": "TVIC29_C000_missing_text",
+  "source_id": "TVIC29",
+  "label": "missing_text",
+  "capture_group": "TVIC29_C000",
+  "capture": {
+    "profile": "aoi",
+    "angle_deg": -1.08,
+    "scale": 0.975,
+    "tx": 1.7,
+    "ty": -2.6,
+    "gain": 0.949,
+    "gamma": 1.079,
+    "bias": -4.5,
+    "blur": 0.21,
+    "noise": 2.0
+  },
+  "split": "val",
+  "pm_split": "train",
+  "marking_technology": "ink",
+  "roi_xyxy": [
+    32,
+    72,
+    608,
+    247
+  ],
+  "component_classes": [
+    "missing_text"
+  ],
+  "instances": [
+    {
+      "class": "missing_text",
+      "component": 0,
+      "instance": 0,
+      "bbox_xyxy": [
+        206,
+        96,
+        316,
+        149
+      ],
+      "area": 2163,
+      "contrast": 107.9,
+      "visible": true,
+      "polygon": [
+        312.0,
+        98.0,
+        302.0,
+        99.0,
+        302.0,
+        102.0,
+        299.0,
+        105.0,
+        298.0,
+        112.0,
+        295.0,
+        115.0,
+        294.0,
+        118.0,
+        295.0,
+        122.0,
+        292.0,
+        123.0,
+        288.0,
+        129.0,
+        289.0,
+        138.0,
+        292.0,
+        139.0,
+        300.0,
+        138.0,
+        303.0,
+        140.0,
+        303.0,
+        148.0,
+        310.0,
+        148.0,
+        310.0,
+        143.0,
+        312.0,
+        141.0,
+        314.0,
+        141.0,
+        315.0,
+        139.0,
+        315.0,
+        133.0,
+        312.0,
+        131.0
+      ]
+    }
+  ],
+  "changed_px": 1956,
+  "seed": "11863110928244203472",
+  "components": [
+    {
+      "class": "missing_text",
+      "mechanism": "ink_skip",
+      "severity_label": "severe",
+      "severity_value": 1.0,
+      "mask_px": 2163
+    }
+  ],
+  "image": "samples/images/val/TVIC29_C000_missing_text.png",
+  "mask": "samples/masks/val/TVIC29_C000_missing_text.png",
+  "clean_counterpart": "samples/images/val/TVIC29_C000_good.png",
+  "generator_version": "icmarkingsynthetic-generator-1.0"
+}

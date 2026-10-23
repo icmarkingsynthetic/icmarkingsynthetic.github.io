@@ -1,0 +1,109 @@
+{
+  "image_id": "TVIC52_C011_smeared_text",
+  "source_id": "TVIC52",
+  "label": "smeared_text",
+  "capture_group": "TVIC52_C011",
+  "capture": {
+    "profile": "aoi",
+    "angle_deg": 1.79,
+    "scale": 1.022,
+    "tx": -7.1,
+    "ty": 2.0,
+    "gain": 0.937,
+    "gamma": 0.929,
+    "bias": 4.8,
+    "blur": 0.35,
+    "noise": 3.2
+  },
+  "split": "train",
+  "pm_split": "train",
+  "marking_technology": "laser",
+  "roi_xyxy": [
+    177,
+    26,
+    451,
+    301
+  ],
+  "component_classes": [
+    "smeared_text"
+  ],
+  "instances": [
+    {
+      "class": "smeared_text",
+      "component": 0,
+      "instance": 0,
+      "bbox_xyxy": [
+        266,
+        147,
+        317,
+        179
+      ],
+      "area": 1443,
+      "contrast": 38.0,
+      "visible": true,
+      "polygon": [
+        266.0,
+        148.0,
+        266.0,
+        177.0,
+        268.0,
+        176.0,
+        269.0,
+        177.0,
+        268.0,
+        178.0,
+        292.0,
+        178.0,
+        293.0,
+        177.0,
+        295.0,
+        178.0,
+        297.0,
+        175.0,
+        299.0,
+        175.0,
+        299.0,
+        173.0,
+        301.0,
+        171.0,
+        303.0,
+        175.0,
+        304.0,
+        172.0,
+        306.0,
+        173.0,
+        308.0,
+        171.0,
+        309.0,
+        173.0,
+        309.0,
+        171.0,
+        312.0,
+        169.0,
+        316.0,
+        170.0,
+        316.0,
+        147.0,
+        311.0,
+        148.0,
+        310.0,
+        147.0
+      ]
+    }
+  ],
+  "changed_px": 3008,
+  "seed": "16265485482593157433",
+  "components": [
+    {
+      "class": "smeared_text",
+      "mechanism": "uneven_focus",
+      "severity_label": "high",
+      "severity_value": 0.75,
+      "mask_px": 2904
+    }
+  ],
+  "image": "samples/images/train/TVIC52_C011_smeared_text.png",
+  "mask": "samples/masks/train/TVIC52_C011_smeared_text.png",
+  "clean_counterpart": "samples/images/train/TVIC52_C011_good.png",
+  "generator_version": "icmarkingsynthetic-generator-1.0"
+}

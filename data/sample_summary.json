@@ -1,0 +1,14 @@
+{
+  "sample_images": 600,
+  "class_counts": {
+    "good": 100,
+    "scratch": 100,
+    "contamination": 100,
+    "missing_text": 100,
+    "smeared_text": 100,
+    "combined": 100
+  },
+  "source_count": 40,
+  "supporting_clean_images": 360,
+  "selection": "Equal class counts; every source represented; deterministic identifier ranking; only available clean counterparts."
+}

@@ -1,0 +1,93 @@
+{
+  "image_id": "TVIC19_C003_missing_text",
+  "source_id": "TVIC19",
+  "label": "missing_text",
+  "capture_group": "TVIC19_C003",
+  "capture": {
+    "profile": "low_resolution_grainy_aoi",
+    "angle_deg": 1.06,
+    "scale": 1.015,
+    "tx": 5.7,
+    "ty": -1.2,
+    "gain": 0.927,
+    "gamma": 0.949,
+    "bias": -5.2,
+    "blur": 0.49,
+    "noise": 8.0
+  },
+  "split": "train",
+  "pm_split": "train",
+  "marking_technology": "laser",
+  "roi_xyxy": [
+    174,
+    9,
+    476,
+    314
+  ],
+  "component_classes": [
+    "missing_text"
+  ],
+  "instances": [
+    {
+      "class": "missing_text",
+      "component": 0,
+      "instance": 0,
+      "bbox_xyxy": [
+        301,
+        152,
+        340,
+        180
+      ],
+      "area": 635,
+      "contrast": 59.3,
+      "visible": true,
+      "polygon": [
+        307.0,
+        152.0,
+        301.0,
+        155.0,
+        302.0,
+        174.0,
+        307.0,
+        179.0,
+        313.0,
+        179.0,
+        318.0,
+        174.0,
+        319.0,
+        166.0,
+        318.0,
+        163.0,
+        315.0,
+        160.0,
+        307.0,
+        159.0,
+        306.0,
+        157.0,
+        307.0,
+        156.0,
+        317.0,
+        157.0,
+        317.0,
+        155.0,
+        312.0,
+        152.0
+      ]
+    }
+  ],
+  "changed_px": 623,
+  "seed": "7940869145334038772",
+  "components": [
+    {
+      "class": "missing_text",
+      "mechanism": "power_fade",
+      "severity_label": "medium",
+      "severity_value": 0.5,
+      "mask_px": 635
+    }
+  ],
+  "image": "samples/images/train/TVIC19_C003_missing_text.png",
+  "mask": "samples/masks/train/TVIC19_C003_missing_text.png",
+  "clean_counterpart": "samples/images/train/TVIC19_C003_good.png",
+  "generator_version": "icmarkingsynthetic-generator-1.0"
+}

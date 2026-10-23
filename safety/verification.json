@@ -1,0 +1,13 @@
+{
+  "text_policy_hits": [],
+  "sample_images": 600,
+  "pixel_equal_images": 600,
+  "source_attributions": 40,
+  "release_unchanged": true,
+  "release_files_hashed": 46465,
+  "public_download": false,
+  "zenodo_doi": null,
+  "reserved_zenodo_doi": "10.5281/zenodo.23600809",
+  "archives_uploaded": true,
+  "publication": "not published"
+}

@@ -1,0 +1,103 @@
+{
+  "image_id": "TVIC47_C011_missing_text",
+  "source_id": "TVIC47",
+  "label": "missing_text",
+  "capture_group": "TVIC47_C011",
+  "capture": {
+    "profile": "aoi",
+    "angle_deg": 0.01,
+    "scale": 0.99,
+    "tx": 6.0,
+    "ty": -1.0,
+    "gain": 0.922,
+    "gamma": 1.041,
+    "bias": -0.1,
+    "blur": 0.16,
+    "noise": 3.7
+  },
+  "split": "train",
+  "pm_split": "train",
+  "marking_technology": "laser",
+  "roi_xyxy": [
+    177,
+    55,
+    475,
+    282
+  ],
+  "component_classes": [
+    "missing_text"
+  ],
+  "instances": [
+    {
+      "class": "missing_text",
+      "component": 0,
+      "instance": 0,
+      "bbox_xyxy": [
+        279,
+        205,
+        372,
+        227
+      ],
+      "area": 536,
+      "contrast": 73.1,
+      "visible": true,
+      "polygon": [
+        324.0,
+        205.0,
+        324.0,
+        207.0,
+        327.0,
+        207.0,
+        329.0,
+        209.0,
+        326.0,
+        212.0,
+        326.0,
+        216.0,
+        330.0,
+        219.0,
+        327.0,
+        222.0,
+        324.0,
+        222.0,
+        322.0,
+        218.0,
+        318.0,
+        218.0,
+        318.0,
+        222.0,
+        322.0,
+        226.0,
+        329.0,
+        226.0,
+        333.0,
+        222.0,
+        333.0,
+        215.0,
+        332.0,
+        214.0,
+        333.0,
+        213.0,
+        333.0,
+        206.0,
+        332.0,
+        205.0
+      ]
+    }
+  ],
+  "changed_px": 455,
+  "seed": "17196789584220649223",
+  "components": [
+    {
+      "class": "missing_text",
+      "mechanism": "raster_dropout",
+      "severity_label": "high",
+      "severity_value": 0.75,
+      "mask_px": 536
+    }
+  ],
+  "image": "samples/images/train/TVIC47_C011_missing_text.png",
+  "mask": "samples/masks/train/TVIC47_C011_missing_text.png",
+  "clean_counterpart": "samples/images/train/TVIC47_C011_good.png",
+  "generator_version": "icmarkingsynthetic-generator-1.0"
+}

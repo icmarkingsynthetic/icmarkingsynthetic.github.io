@@ -1,0 +1,25 @@
+name: Website checks only
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install verification dependencies
+        run: python -m pip install Pillow
+      - name: Check website content and restricted access configuration
+        run: python tools/verify_preview.py --site . --report-output /tmp/site-verification.json
+      - name: Check JavaScript syntax
+        run: node --check assets/js/site.js
+

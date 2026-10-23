@@ -1,0 +1,36 @@
+{
+  "image_id": "TVIC08_C017_good",
+  "source_id": "TVIC08",
+  "label": "good",
+  "capture_group": "TVIC08_C017",
+  "capture": {
+    "profile": "low_resolution_grainy_aoi",
+    "angle_deg": 1.54,
+    "scale": 1.015,
+    "tx": 3.0,
+    "ty": -2.1,
+    "gain": 1.099,
+    "gamma": 0.928,
+    "bias": 9.6,
+    "blur": 0.03,
+    "noise": 7.1
+  },
+  "split": "train",
+  "pm_split": "train",
+  "marking_technology": "ink",
+  "roi_xyxy": [
+    20,
+    53,
+    633,
+    250
+  ],
+  "component_classes": [],
+  "instances": [],
+  "changed_px": 0,
+  "seed": "10520305757287004998",
+  "components": [],
+  "image": "samples/images/train/TVIC08_C017_good.png",
+  "mask": "samples/masks/train/TVIC08_C017_good.png",
+  "clean_counterpart": "samples/images/train/TVIC08_C017_good.png",
+  "generator_version": "icmarkingsynthetic-generator-1.0"
+}

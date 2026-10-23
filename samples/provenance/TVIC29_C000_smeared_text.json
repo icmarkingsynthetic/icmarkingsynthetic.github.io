@@ -1,0 +1,101 @@
+{
+  "image_id": "TVIC29_C000_smeared_text",
+  "source_id": "TVIC29",
+  "label": "smeared_text",
+  "capture_group": "TVIC29_C000",
+  "capture": {
+    "profile": "aoi",
+    "angle_deg": -1.08,
+    "scale": 0.975,
+    "tx": 1.7,
+    "ty": -2.6,
+    "gain": 0.949,
+    "gamma": 1.079,
+    "bias": -4.5,
+    "blur": 0.21,
+    "noise": 2.0
+  },
+  "split": "val",
+  "pm_split": "train",
+  "marking_technology": "ink",
+  "roi_xyxy": [
+    32,
+    72,
+    608,
+    247
+  ],
+  "component_classes": [
+    "smeared_text"
+  ],
+  "instances": [
+    {
+      "class": "smeared_text",
+      "component": 0,
+      "instance": 0,
+      "bbox_xyxy": [
+        292,
+        153,
+        331,
+        210
+      ],
+      "area": 1550,
+      "contrast": 27.8,
+      "visible": true,
+      "polygon": [
+        323.0,
+        154.0,
+        316.0,
+        153.0,
+        309.0,
+        156.0,
+        303.0,
+        161.0,
+        297.0,
+        170.0,
+        296.0,
+        173.0,
+        296.0,
+        189.0,
+        292.0,
+        199.0,
+        296.0,
+        207.0,
+        299.0,
+        209.0,
+        313.0,
+        209.0,
+        320.0,
+        207.0,
+        326.0,
+        202.0,
+        328.0,
+        198.0,
+        329.0,
+        187.0,
+        325.0,
+        180.0,
+        325.0,
+        178.0,
+        330.0,
+        167.0,
+        328.0,
+        159.0
+      ]
+    }
+  ],
+  "changed_px": 9967,
+  "seed": "10117590586824995273",
+  "components": [
+    {
+      "class": "smeared_text",
+      "mechanism": "contact_drag",
+      "severity_label": "severe",
+      "severity_value": 1.0,
+      "mask_px": 7980
+    }
+  ],
+  "image": "samples/images/val/TVIC29_C000_smeared_text.png",
+  "mask": "samples/masks/val/TVIC29_C000_smeared_text.png",
+  "clean_counterpart": "samples/images/val/TVIC29_C000_good.png",
+  "generator_version": "icmarkingsynthetic-generator-1.0"
+}

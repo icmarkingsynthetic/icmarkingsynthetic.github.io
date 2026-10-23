@@ -1,0 +1,36 @@
+{
+  "image_id": "TVIC49_C022_good",
+  "source_id": "TVIC49",
+  "label": "good",
+  "capture_group": "TVIC49_C022",
+  "capture": {
+    "profile": "aoi",
+    "angle_deg": 0.05,
+    "scale": 1.022,
+    "tx": 1.0,
+    "ty": 2.5,
+    "gain": 0.984,
+    "gamma": 0.995,
+    "bias": -0.1,
+    "blur": 0.19,
+    "noise": 3.5
+  },
+  "split": "test",
+  "pm_split": "test",
+  "marking_technology": "ink",
+  "roi_xyxy": [
+    176,
+    14,
+    474,
+    310
+  ],
+  "component_classes": [],
+  "instances": [],
+  "changed_px": 0,
+  "seed": "13232277723165688863",
+  "components": [],
+  "image": "samples/images/test/TVIC49_C022_good.png",
+  "mask": "samples/masks/test/TVIC49_C022_good.png",
+  "clean_counterpart": "samples/images/test/TVIC49_C022_good.png",
+  "generator_version": "icmarkingsynthetic-generator-1.0"
+}

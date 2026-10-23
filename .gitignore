@@ -1,0 +1,8 @@
+__pycache__/
+*.pyc
+screenshots/
+safety/release_before.json
+*.zip
+.env
+.env.*
+

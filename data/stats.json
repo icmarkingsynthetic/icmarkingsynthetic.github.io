@@ -1,0 +1,126 @@
+{
+  "images": 6000,
+  "image_classes": 6,
+  "defect_types": 4,
+  "sources": 40,
+  "capture_groups": 1018,
+  "visible_instances": 6757,
+  "image_sizes": {
+    "640 × 320": 6000
+  },
+  "cosmetic_images": 467,
+  "auxiliary_counterparts_needed": 18,
+  "images_needing_auxiliary_counterparts": 38,
+  "source_disjoint": {
+    "train": 3605,
+    "val": 1204,
+    "test": 1191
+  },
+  "product_matched": {
+    "train": 4569,
+    "val": 716,
+    "test": 715
+  },
+  "classes": [
+    {
+      "label": "good",
+      "images": 1000,
+      "instances": 0,
+      "source_disjoint": {
+        "train": 600,
+        "val": 200,
+        "test": 200
+      },
+      "product_matched": {
+        "train": 760,
+        "val": 120,
+        "test": 120
+      }
+    },
+    {
+      "label": "scratch",
+      "images": 1000,
+      "instances": 1000,
+      "source_disjoint": {
+        "train": 597,
+        "val": 202,
+        "test": 201
+      },
+      "product_matched": {
+        "train": 761,
+        "val": 120,
+        "test": 119
+      }
+    },
+    {
+      "label": "contamination",
+      "images": 1000,
+      "instances": 1400,
+      "source_disjoint": {
+        "train": 600,
+        "val": 200,
+        "test": 200
+      },
+      "product_matched": {
+        "train": 760,
+        "val": 120,
+        "test": 120
+      }
+    },
+    {
+      "label": "missing_text",
+      "images": 1000,
+      "instances": 1000,
+      "source_disjoint": {
+        "train": 603,
+        "val": 199,
+        "test": 198
+      },
+      "product_matched": {
+        "train": 766,
+        "val": 117,
+        "test": 117
+      }
+    },
+    {
+      "label": "smeared_text",
+      "images": 1000,
+      "instances": 1000,
+      "source_disjoint": {
+        "train": 602,
+        "val": 202,
+        "test": 196
+      },
+      "product_matched": {
+        "train": 760,
+        "val": 120,
+        "test": 120
+      }
+    },
+    {
+      "label": "combined",
+      "images": 1000,
+      "instances": 2357,
+      "source_disjoint": {
+        "train": 603,
+        "val": 201,
+        "test": 196
+      },
+      "product_matched": {
+        "train": 762,
+        "val": 119,
+        "test": 119
+      }
+    }
+  ],
+  "severity_components": {
+    "low": 1515,
+    "severe": 1552,
+    "medium": 1511,
+    "high": 1525
+  },
+  "package_families": {
+    "long_or_DIP": 6,
+    "square_QFP": 34
+  }
+}

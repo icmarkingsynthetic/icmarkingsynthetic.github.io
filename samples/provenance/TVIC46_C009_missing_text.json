@@ -1,0 +1,87 @@
+{
+  "image_id": "TVIC46_C009_missing_text",
+  "source_id": "TVIC46",
+  "label": "missing_text",
+  "capture_group": "TVIC46_C009",
+  "capture": {
+    "profile": "low_resolution_grainy_aoi",
+    "angle_deg": -0.72,
+    "scale": 0.993,
+    "tx": -0.0,
+    "ty": 0.4,
+    "gain": 1.097,
+    "gamma": 1.091,
+    "bias": 6.6,
+    "blur": 0.31,
+    "noise": 6.4
+  },
+  "split": "test",
+  "pm_split": "train",
+  "marking_technology": "laser",
+  "roi_xyxy": [
+    170,
+    43,
+    470,
+    285
+  ],
+  "component_classes": [
+    "missing_text"
+  ],
+  "instances": [
+    {
+      "class": "missing_text",
+      "component": 0,
+      "instance": 0,
+      "bbox_xyxy": [
+        259,
+        172,
+        339,
+        193
+      ],
+      "area": 818,
+      "contrast": 79.0,
+      "visible": true,
+      "polygon": [
+        336.0,
+        172.0,
+        327.0,
+        173.0,
+        326.0,
+        182.0,
+        327.0,
+        184.0,
+        332.0,
+        185.0,
+        333.0,
+        187.0,
+        331.0,
+        189.0,
+        326.0,
+        189.0,
+        326.0,
+        192.0,
+        332.0,
+        192.0,
+        337.0,
+        187.0,
+        338.0,
+        177.0
+      ]
+    }
+  ],
+  "changed_px": 755,
+  "seed": "10104656776797679180",
+  "components": [
+    {
+      "class": "missing_text",
+      "mechanism": "raster_dropout",
+      "severity_label": "severe",
+      "severity_value": 1.0,
+      "mask_px": 818
+    }
+  ],
+  "image": "samples/images/test/TVIC46_C009_missing_text.png",
+  "mask": "samples/masks/test/TVIC46_C009_missing_text.png",
+  "clean_counterpart": "samples/images/test/TVIC46_C009_good.png",
+  "generator_version": "icmarkingsynthetic-generator-1.0"
+}
