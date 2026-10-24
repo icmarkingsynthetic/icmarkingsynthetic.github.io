@@ -1,9 +1,10 @@
-name: Website checks only
+name: Website checks
 
 on:
   push:
   pull_request:
   workflow_dispatch:
+  workflow_call:
 
 permissions:
   contents: read
@@ -22,4 +23,17 @@ jobs:
         run: python tools/verify_preview.py --site . --report-output /tmp/site-verification.json
       - name: Check JavaScript syntax
         run: node --check assets/js/site.js
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Audit performance, accessibility and browser best practices
+        run: |
+          python -m http.server 8878 --bind 127.0.0.1 >/tmp/site-server.log 2>&1 &
+          npx --yes lighthouse@12.8.2 http://127.0.0.1:8878/ --chrome-flags="--headless --no-sandbox" --output=json --output=html --output-path=/tmp/site-audit --only-categories=performance,accessibility,best-practices --quiet
+          node -e "const r=require('/tmp/site-audit.report.json'); for(const k of ['performance','accessibility','best-practices']) { console.log(k,100*r.categories[k].score); if(r.categories[k].score<=0.90) process.exitCode=1; }"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: website-audit
+          path: /tmp/site-audit.report.*
 

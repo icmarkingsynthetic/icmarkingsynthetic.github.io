@@ -1,6 +1,6 @@
-# ICMarkingSynthetic private website preview
+# ICMarkingSynthetic project website
 
-This is a local, unpublished preview. Both checked archives are saved in an unpublished Zenodo draft. The reserved DOI is `10.5281/zenodo.23600809`; it is not yet registered and is displayed as text, not a working public record link. No full-archive download URLs are present. Do not deploy until the corresponding author and project owner approve publication.
+Project website: https://icmarkingsynthetic.github.io/. The Zenodo record is published at DOI `10.5281/zenodo.23600809`, with both checked archives restricted. The project owner confirmed corresponding-author approval for public metadata and a public project page on 24 October 2026. The site links to the record and provides email-based access requests. No full-archive download URLs are present. Deployment is gated by the automated checks below.
 
 ## Open locally
 
@@ -32,7 +32,7 @@ The tools read external inputs but write only within the preview folder. Supply 
 
 Run the archive-information export before verification when either archive changes. The email button opens a message template in the visitor's email app. It does not submit a request, grant access, or automatically send files.
 
-Python requirements: Pillow and python-docx. The browser runtime needs no package installation. The verifier must pass before every commit or future deployment. The repository workflow performs verification only, with read-only repository permissions. It has no deployment or publishing action. GitHub Pages must remain disabled until publication is explicitly approved.
+Python requirements: Pillow and python-docx. The browser runtime needs no package installation. The verifier must pass before every commit or deployment. Automatic push checks have read-only permissions. The separate manual Pages workflow checks content before packaging tracked static assets and deploying; it refuses to run while the repository is private. Enable Pages only after the final publication review.
 
 Local screenshots, the original-release hash ledger, Python caches, environment files, and full archives are excluded from the repository. The sanitized site, sample assets, content-source map, generating tools, and verification summary are included. Original-release integrity verification requires the locally retained ledger; repository-only checks do not claim to revalidate files that are not present.
 
@@ -44,11 +44,11 @@ Every sample displays the original creator and license. The attributions section
 
 ## Release state and remaining checks
 
-- Repository owner: `icmarkingsynthetic`; the repository remains private and the local preview is not deployed.
+- Repository owner: `icmarkingsynthetic`; public repository and website publication are approved by the project owner.
 - Code license: MIT. Optional vision-language conversation files are excluded.
-- Original auxiliary clean captures were recovered and included. Exact rerendering of the distributed clean images remains unresolved and is documented.
-- Both archives are uploaded and checksum-verified in the unpublished deposit. Files remain restricted.
-- Requests currently go to the institutional email supplied by the author. No public Zenodo request page is claimed while the record is a draft.
-- Complete formal Lighthouse and final publication review. No Lighthouse score is claimed for this preview.
+- Original auxiliary clean captures were recovered and included. Exact reproduction and platform limits are documented in the generator archive's tested-platforms file, reproduced in the access section.
+- Both latest archives are uploaded and checksum-verified in the published record. Files remain restricted.
+- Requests go to the institutional email supplied by the author; approval is manual. The public Zenodo record includes the same instructions.
+- The automated website check publishes a Lighthouse report; performance, accessibility, and best-practice scores must each exceed 90 before deployment.
 
-`data/config.json` keeps `public_download` false and the registered `zenodo_doi` null; `reserved_zenodo_doi` stores the genuine reservation. After an explicitly approved record publication, verify the record and its access workflow before changing its registered status or enabling any public access link. No automatic publication action is connected to this configuration.
+`data/config.json` keeps `public_download` false and stores the published `zenodo_doi`. The record was verified without login: its metadata are public and its file access is restricted. No automatic publication action is connected to this configuration. Pages deployment requires an explicit manual workflow run after the checks pass.

@@ -136,7 +136,7 @@
     };
     const [file,description] = options[kind];
     formatText = kind === 'provenance' ? JSON.stringify({image_id:record.image_id,source_id:record.source_id,capture_group:record.capture_group,split:record.split,component_classes:record.component_classes,components:record.components,seed:record.seed},null,2) : await (await fetch('samples/'+file)).text();
-    $('format-file').textContent = file;
+    $('format-file').textContent = file.replace('labels/boxes/', 'labels/').replace('labels/polygons/', 'labels_polygons/');
     $('format-content').textContent = formatText;
     $('format-description').textContent = description;
     document.querySelectorAll('[data-format]').forEach(b => b.setAttribute('aria-pressed',b.dataset.format === kind));
@@ -243,13 +243,14 @@
     reducedMotion.addEventListener('change',()=>{stopTour();stopComparison();});
   }
   function setupAccess() {
-    const doi = config.reserved_zenodo_doi;
-    $('reserved-doi').textContent = doi || 'Not reserved';
+    const doi = config.zenodo_doi;
+    $('reserved-doi').textContent = doi;
+    $('zenodo-record').href = `https://doi.org/${doi}`;
     $('copy-doi').disabled = !doi;
     $('copy-doi').addEventListener('click',()=>copy(doi));
     const email = config.request_access_email;
     const subject = 'ICMarkingSynthetic research access request';
-    const body = `Hello,\n\nI would like to request access to ICMarkingSynthetic.\nReserved DOI: ${doi}\n\nName:\nAffiliation:\nResearch purpose:\nRequested materials (dataset, generator, or both):\n\nThank you.`;
+    const body = `Hello,\n\nI would like to request access to ICMarkingSynthetic.\nDOI: ${doi}\n\nName:\nAffiliation:\nResearch purpose:\nRequested materials (dataset, generator, or both):\n\nThank you.`;
     $('request-email').href = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
     $('request-contact').href = `mailto:${email}`;
     $('request-contact').textContent = email;
@@ -261,19 +262,22 @@
     }
     $('archive-checksums').innerHTML = ['dataset','code'].map(kind=>`<dt>${esc(release[kind].name)}</dt><dd>${esc(release[kind].sha256)}</dd>`).join('');
     const descriptions = {
-      docs:'Format definitions, split protocols, provenance fields, and loading instructions.',
+      docs:'Annotation format definitions and preserved validation results.',
+      examples:'Executed browsing and statistics notebooks, plus loading, training, and face-crop scripts.',
       images:'Full grayscale images in source-disjoint train, validation, and test folders.',
       masks:'Union and component renderer-support masks. These are not exhaustive maps of every changed pixel.',
-      labels:'Bounding boxes, instance polygons, COCO annotations, and image-level classes. Box aliases support the standard detector loader.',
+      labels:'YOLO bounding boxes, arranged for the standard detector loader.',
+      labels_polygons:'Normalized instance polygons for segmentation.',
+      labels_coco:'Pixel-space boxes and polygons in COCO format.',
       face_crop:'The same images cropped to the package face, with transformed labels and their own dataset definitions.',
-      splits:'Source membership and capture-group-safe product-matched image lists.',
+      splits:'CSV source membership and capture-group-safe product-matched image lists.',
       provenance:'Per-image generation records, source attribution, and auxiliary defect-free counterparts.',
       supplement_cosmetic:'Separate cosmetic hard negatives and their labels and face crops, outside the balanced main collection.'
     };
     const folders = Object.entries(release.dataset.folders).map(([name,count])=>`<div><code>${esc(name)}/</code><p>${esc(descriptions[name] || 'Supporting archive files.')} <span class="micro">${number(count)} files</span></p></div>`).join('');
     const docs = Object.entries(release.documents).map(([path,content])=>`<details><summary>${esc(path)} <span aria-hidden="true">+</span></summary><pre>${esc(content)}</pre></details>`).join('');
     document.querySelector('#formats .shell').insertAdjacentHTML('beforeend',`<div class="package-guide"><h3>Inside the uploaded dataset archive</h3><div class="package-folders">${folders}</div><p>Top-level orientation, attribution, license, checksum, dataset-definition, and metadata files accompany these folders. The following documentation is read directly from the verified archive.</p>${docs}</div>`);
-    document.querySelector('.request-details').insertAdjacentHTML('afterend',`<details class="package-guide"><summary>Generator contents, installation, and reproduction limits <span aria-hidden="true">+</span></summary><pre>${esc(release.code.readme)}</pre></details>`);
+    document.querySelector('.request-details').insertAdjacentHTML('afterend',`<details class="package-guide"><summary>Generator contents, installation, and reproduction limits <span aria-hidden="true">+</span></summary><pre>${esc(release.code.readme)}</pre><pre>${esc(release.code.tested_platforms)}</pre></details>`);
   }
   async function init() {
     [stats,samples,sources,summary,paper,config,release] = await Promise.all(['stats','sample_index','sources','sample_summary','paper','config','release'].map(name => json(`data/${name}.json`)));

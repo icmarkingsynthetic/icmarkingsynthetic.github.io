@@ -1,0 +1,41 @@
+name: Publish project website
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: project-pages
+  cancel-in-progress: false
+
+jobs:
+  verify:
+    if: github.event.repository.private == false
+    uses: ./.github/workflows/check.yml
+  package:
+    needs: verify
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Assemble static website from tracked files
+        run: |
+          mkdir public-site
+          git archive HEAD index.html assets data samples | tar -x -C public-site
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: public-site
+  deploy:
+    needs: package
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy verified site
+        id: deployment
+        uses: actions/deploy-pages@v4

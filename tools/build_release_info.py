@@ -31,7 +31,10 @@ def main():
         prefix = z.namelist()[0].split('/')[0] + '/'
         result['counterparts'] = len(z.read(prefix + 'provenance/counterparts/records.jsonl').splitlines())
         result['documents'] = {name: z.read(prefix + name).decode('utf-8-sig') for name in
-                               ['docs/FORMATS.md', 'docs/SPLITS.md', 'docs/LOADING.md', 'DATASET_CARD.md']}
+                               ['README.md', 'docs/FORMATS.md', 'DATASET_CARD.md']}
+    with ZipFile(a.code) as z:
+        prefix = z.namelist()[0].split('/')[0] + '/'
+        result['code']['tested_platforms'] = z.read(prefix + 'TESTED_PLATFORMS.md').decode('utf-8-sig')
     a.output.parent.mkdir(parents=True, exist_ok=True)
     a.output.write_text(json.dumps(result, indent=2, ensure_ascii=False) + '\n', encoding='utf-8')
 

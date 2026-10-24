@@ -1,5 +1,9 @@
 # Local preview review
 
+## Current access update, 24 October 2026
+
+This entry supersedes the historical deposit and reproduction status below. The Zenodo record is now published with restricted archives. The website links to its DOI, retains manual email access requests, and contains no full-archive download links. Archive metadata and displayed documentation were re-extracted from the latest uploaded ZIPs. The generator's tested-platforms document replaces the obsolete unresolved-reproduction statement. Website publication and final deployment checks are still pending; the repository remains private.
+
 ## Delivery state
 
 Private local preview only. The HTTP server binds to the loopback interface. Both archives are saved in an unpublished deposit; the site displays the reserved DOI and email-based access instructions. Full archive links are absent. No public deployment or record publication was performed.

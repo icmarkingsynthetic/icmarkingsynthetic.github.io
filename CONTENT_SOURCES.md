@@ -27,11 +27,11 @@ Scientific content is paraphrased from the final manuscript, not generated as a 
 | Image and annotation licenses | Data Availability; approved release layout | Image and annotation scopes retained; MIT code license explicitly approved by user on 23 October 2026 |
 | Prior study reference | Final manuscript reference 1 | Extracted citation and DOI |
 | Provisional citation | Manuscript title/authors and file metadata year | Unpublished status, no invented publication DOI |
-| Access and archive descriptions | Approved website/archive plan and authenticated upload verification, 23 October 2026 | Both archives uploaded and checksums matched; reserved DOI not advertised as registered; downloads disabled; author email is the current request route |
+| Access and archive descriptions | Published Zenodo record 23600809, verified 24 October 2026 | Both latest archives uploaded and checksums matched; public metadata with restricted files; author email is the current request route |
 | Archive size, checksum, folder counts and documentation | Uploaded dataset and generator ZIP copies | Computed by `build_release_info.py`; documentation extracted verbatim; no full-archive URLs exposed |
 | Request instructions and email template | User-approved contact addresses and private-deposit state | Name, affiliation, purpose and requested materials; authors review requests; no automatic approval or file delivery |
-| Renderer mask and exact-reproduction limitations | Dataset format documentation and generator README in the uploaded archives | No exhaustive changed-pixel-mask claim; no claim of byte-exact clean-image regeneration |
-| Reserved DOI and release choices | Authenticated Zenodo draft 23600809 and user decisions, 23 October 2026 | DOI 10.5281/zenodo.23600809 is reserved only; code MIT; optional VLM files excluded; private repository created without publication |
+| Renderer mask and exact-reproduction limitations | Dataset format documentation, generator README and TESTED_PLATFORMS.md in the latest uploaded archives | No exhaustive changed-pixel-mask claim; tested reproduction environments and unverified platforms explicitly distinguished |
+| Published DOI and release choices | Zenodo record 23600809 and user decisions, 24 October 2026 | DOI 10.5281/zenodo.23600809 identifies the published record; code MIT; optional VLM files excluded; ZIPs restricted; website repository still private |
 | Contact links | User-provided contact details | Personal, institutional, and corresponding-author addresses |
 | Private status, buttons, filters, instructions | Preview operation and user request | Interface wording; no experimental claims |
 | Homepage reveal slider and playback | Featured release image and its exact clean counterpart | Display-only clipping, not generated intermediate images or a severity model |

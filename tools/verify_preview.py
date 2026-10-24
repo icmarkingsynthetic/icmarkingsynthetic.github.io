@@ -27,10 +27,11 @@ def main():
                 if pattern in text or pattern in path.relative_to(args.site).as_posix().lower():
                     failures.append({'file':path.relative_to(args.site).as_posix(),'policy':i})
     config = json.loads((args.site/'data/config.json').read_text())
-    assert config['public_download'] is False and config['zenodo_doi'] is None
+    assert config['public_download'] is False
+    assert config['zenodo_doi'] == config['reserved_zenodo_doi']
     assert re.fullmatch(r'10\.\d{4,9}/\S+', config['reserved_zenodo_doi'])
     assert config['archives_uploaded'] is True
-    assert config['zenodo_status'] == 'unpublished draft'
+    assert config['zenodo_status'] == 'published restricted'
     assert config['code_license'] == 'MIT' and config['include_vlm'] is False
     info = json.loads((args.site/'data/release.json').read_text())
     for kind in ['dataset', 'code']:
@@ -81,8 +82,8 @@ def main():
     result = {'text_policy_hits':failures, 'sample_images':len(samples), 'pixel_equal_images':checked,
               'source_attributions':len(source_ids), 'release_unchanged':unchanged,
               'release_files_hashed':files_checked, 'public_download':False,
-              'zenodo_doi':None, 'reserved_zenodo_doi':config['reserved_zenodo_doi'],
-              'archives_uploaded':True, 'publication':'not published'}
+              'zenodo_doi':config['zenodo_doi'], 'reserved_zenodo_doi':config['reserved_zenodo_doi'],
+              'archives_uploaded':True, 'publication':config['zenodo_status']}
     dump(args.report_output or args.site/'safety/verification.json',result)
     print(json.dumps(result,indent=2))
     if failures:
