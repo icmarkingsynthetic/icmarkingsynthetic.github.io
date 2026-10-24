@@ -207,60 +207,39 @@
     document.querySelectorAll('.chart-row').forEach(b=>b.setAttribute('aria-pressed',b.dataset.chartMethod===method));
   }
   async function setupInteractions() {
-    const yieldToBrowser = () => new Promise(resolve => setTimeout(resolve, 0));
     // The initial clean image is present in HTML so it can load immediately.
     // Existing image elements are reused when selecting another specimen.
     document.querySelector('.specimen-image').insertAdjacentHTML('beforeend','<span id="hero-divider" class="comparison-divider" aria-hidden="true"><span>↔</span></span>');
-    await yieldToBrowser();
     document.querySelector('.specimen-tabs').innerHTML=order.map(kind=>`<button data-hero="${kind}" aria-pressed="${kind===featured.label}">${names[kind]}</button>`).join('');
-    await yieldToBrowser();
     $('hero-credit').insertAdjacentHTML('beforebegin','<div class="hero-comparison"><label for="hero-reveal"><span>Clean counterpart</span><span>Synthetic image</span></label><input id="hero-reveal" type="range" min="0" max="100" value="65" aria-label="Compare the featured image with its clean counterpart"><div class="comparison-help"><button id="play-comparison" class="text-button" aria-pressed="false">▶ Play comparison</button><span>Drag to reveal the defect</span></div></div>');
-    await yieldToBrowser();
     $('hero-reveal').addEventListener('input',()=>{stopComparison();updateHeroComparison();});
-    await yieldToBrowser();
     $('play-comparison').addEventListener('click',playComparison);updateHeroComparison();
-    await yieldToBrowser();
     whenNear(['guidelines'], async () => {
     $('pipeline').insertAdjacentHTML('afterend','<div class="tour-controls"><button id="play-tour" class="button secondary" aria-pressed="false">▶ Play walkthrough</button><span id="tour-position" role="status"></span><span class="tour-help">Guided explanation using existing release examples, not live generation.</span></div>');
-    await yieldToBrowser();
     $('tour-position').textContent=`${currentStep+1} / ${steps.length} · ${steps[currentStep][0]}`;
-    await yieldToBrowser();
     $('play-tour').addEventListener('click',()=>{
       if(tourTimer!==null){stopTour();return;}
       showStep(0);$('play-tour').textContent='Ⅱ Pause walkthrough';$('play-tour').setAttribute('aria-pressed','true');
       tourTimer=setInterval(()=>{if(currentStep>=steps.length-1){stopTour();return;}showStep(currentStep+1);},5000);
     });
-    await yieldToBrowser();
     });
     document.querySelector('.filter-toolbar').insertAdjacentHTML('beforebegin','<div class="explore-search"><label for="image-search">Find an image<input id="image-search" type="search" placeholder="Search an image ID, source, or defect name" autocomplete="off"></label><button id="random-specimen" class="button secondary">Explore a random sample ↗</button></div>');
-    await yieldToBrowser();
     $('image-search').addEventListener('input',()=>{shown=12;renderGrid();});
-    await yieldToBrowser();
     $('random-specimen').addEventListener('click',()=>{const list=filterSamples();if(list.length)openViewer(list[Math.floor(Math.random()*list.length)].id);});
-    await yieldToBrowser();
     $('viewer').setAttribute('aria-labelledby','viewer-title');
-    await yieldToBrowser();
     document.querySelector('.viewer-layout').insertAdjacentHTML('beforebegin','<div class="viewer-navigation"><button id="previous-sample" class="button secondary" aria-label="Previous specimen">← Previous</button><span id="viewer-position" role="status"></span><button id="next-sample" class="button secondary" aria-label="Next specimen">Next →</button></div>');
-    await yieldToBrowser();
     $('previous-sample').addEventListener('click',()=>moveViewer(-1));$('next-sample').addEventListener('click',()=>moveViewer(1));
-    await yieldToBrowser();
     $('viewer').addEventListener('keydown',event=>{if(/INPUT|SELECT|TEXTAREA/.test(event.target.tagName))return;if(event.key==='ArrowLeft'){event.preventDefault();moveViewer(-1);}if(event.key==='ArrowRight'){event.preventDefault();moveViewer(1);}});
-    await yieldToBrowser();
     whenNear(['evaluation'], async () => {
     document.querySelector('.results-details').insertAdjacentHTML('beforebegin',`<section class="interactive-results" aria-labelledby="chart-title"><div class="chart-heading"><div><p class="eyebrow">Explore the reported results</p><h3 id="chart-title">Change the measure. See the trade-off.</h3></div><p>Existing manuscript results only. No model runs in the browser.</p></div><div class="chart-controls"><label>Training comparison<select id="chart-population"><option value="matched">${esc(paper.transfer[2][0].replace(', product-matched',''))} + baselines</option><option value="full">Full release + baselines</option></select></label><label>Measure<select id="chart-metric">${[2,3,4,5,6].map(i=>`<option value="${i}">${esc(paper.transfer_headers[i])}</option>`).join('')}</select></label><label>Order<select id="chart-order"><option value="paper">Paper order</option><option value="score">Best point estimate first</option></select></label></div><p id="chart-axis" class="chart-axis"></p><div id="transfer-chart" class="transfer-chart"></div><p id="chart-note" class="note"></p><div id="chart-detail" class="chart-detail" role="status"></div></section>`);
-    await yieldToBrowser();
     ['chart-population','chart-metric','chart-order'].forEach(id=>$(id).addEventListener('change',renderChart));renderChart();
-    await yieldToBrowser();
     });
     document.querySelector('.site-header').insertAdjacentHTML('beforeend','<div class="reading-progress" aria-hidden="true"><span id="reading-progress-fill"></span></div>');
-    await yieldToBrowser();
     const navigation=[...document.querySelectorAll('#navigation a')];let scrollFrame=null;
-    await yieldToBrowser();
     const updatePosition=()=>{
       scrollFrame=null;const available=document.documentElement.scrollHeight-innerHeight;
       $('reading-progress-fill').style.transform=`scaleX(${available>0?scrollY/available:0})`;
     };
-    await yieldToBrowser();
     addEventListener('scroll',()=>{if(scrollFrame===null)scrollFrame=requestAnimationFrame(updatePosition);},{passive:true});
     const sectionObserver = new IntersectionObserver(entries => {
       for (const entry of entries) if (entry.isIntersecting) {
@@ -271,12 +250,8 @@
       }
     }, {rootMargin:'-10% 0px -70% 0px'});
     navigation.forEach(link => {const section=document.querySelector(link.getAttribute('href'));if(section)sectionObserver.observe(section);});
-    await yieldToBrowser();
-    if(!reducedMotion.matches){const observer=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('is-revealed');observer.unobserve(entry.target);}}),{threshold:0.06});document.querySelectorAll('.section-heading,.cause-grid article,.evidence-cards article').forEach(element=>{element.classList.add('reveal-item');observer.observe(element);});}
     document.addEventListener('visibilitychange',()=>{if(document.hidden){stopTour();stopComparison();}});
-    await yieldToBrowser();
     reducedMotion.addEventListener('change',()=>{stopTour();stopComparison();});
-    await yieldToBrowser();
   }
   function setupAccess() {
     const doi = config.zenodo_doi;
@@ -325,78 +300,49 @@
     ids.forEach(id => observer.observe($(id)));
   }
   async function init() {
-    const yieldToBrowser = () => new Promise(resolve => setTimeout(resolve, 0));
     [stats,samples,sources,summary,paper,config,release] = await Promise.all(['stats','featured','sources','sample_summary','paper','config','release'].map(name => json(`data/${name}.json`)));
     const measures = [[stats.images,'synthetic images'],[stats.image_classes,'image classes'],[stats.defect_types,'defect types'],[stats.sources,'source images'],[stats.visible_instances,'visible instances']];
-    await yieldToBrowser();
     $('key-metrics').innerHTML = measures.map(([value,label]) => `<div class="metric"><strong>${number(value)}</strong><span>${label}</span></div>`).join('');
-    await yieldToBrowser();
     whenNear(['guidelines'], async () => {
     $('pipeline').innerHTML = steps.map((s,i) => `<button data-step="${i}" aria-pressed="${i===0}"><span>${String(i+1).padStart(2,'0')}</span>${s[0]}</button>`).join('');
-    await yieldToBrowser();
-    await yieldToBrowser();
     });
     whenNear(['explore'], async () => {
     $('explore-intro').textContent = `A traceable sample of ${number(summary.sample_images)} release images, ${number(summary.class_counts.good)} per class. Inspect the clean counterpart and annotations without downloading an archive.`;
-    await yieldToBrowser();
     $('class-filters').innerHTML = [['all','All images'],...order.map(k => [k,names[k]])].map(([key,label]) => `<button data-class="${key}" aria-pressed="${key==='all'}">${label}</button>`).join('');
-    await yieldToBrowser();
     $('filter-source').innerHTML += sources.map(s => `<option value="${esc(s.id)}">${esc(s.id)}</option>`).join('');
-    await yieldToBrowser();
     });
     whenNear(['explore'], async () => {
     $('group-label').textContent = 'TVIC29_C000';
-    await yieldToBrowser();
     $('group-strip').innerHTML = order.map(kind => { const s=samples.find(s=>s.group==='TVIC29_C000'&&s.label===kind); return `<div><button data-open="${s.id}" aria-label="Inspect ${names[kind]} example"><img src="${s.thumb}" width="480" height="240" loading="lazy" alt="${names[kind]} example from the same capture"><span>${names[kind]}</span></button><p class="image-credit">${credit(s.source)}</p></div>`; }).join('');
-    await yieldToBrowser();
     });
     whenNear(['dataset'], async () => {
     $('composition').innerHTML = stats.classes.map(c => `<tr><th scope="row">${names[c.label]}</th><td>${number(c.images)}</td><td>${number(c.instances)}</td></tr>`).join('');
-    await yieldToBrowser();
     $('supplement-copy').textContent = `${number(stats.capture_groups)} capture groups connect the balanced collection. A separate ${number(stats.cosmetic_images)}-image cosmetic supplement is not part of the ${number(stats.images)} images. The archive includes ${number(release.counterparts)} auxiliary clean counterparts recovered from the original captures. The viewer always uses the matching stored counterpart, not an approximate regeneration.`;
-    await yieldToBrowser();
-    await yieldToBrowser();
     });
     whenNear(['evaluation'], async () => {
     $('inspector-result').textContent = paper.inspector_adapted + '%';
-    await yieldToBrowser();
     $('inspector-description').textContent = `On the synthetic test split, with thresholds fitted on synthetic validation images. Published thresholds yield ${paper.inspector_published}% in the manuscript.`;
-    await yieldToBrowser();
     $('transfer-result').innerHTML = `${esc(paper.transfer[0][2])}<small> / ${esc(paper.transfer_headers[2].split('/')[1].trim())}</small>`;
-    await yieldToBrowser();
     $('transfer-table').innerHTML = `<caption>Detector transfer on real frames. FB: mean false boxes per defect-free frame. Values are mean ± sample SD over training seeds. Bracketed source numbers refer to the manuscript bibliography.</caption><thead><tr>${paper.transfer_headers.map(h=>`<th scope="col">${esc(h)}</th>`).join('')}</tr></thead><tbody>${paper.transfer.map(row=>`<tr>${row.map((v,i)=>i?`<td>${esc(v)}</td>`:`<th scope="row">${esc(v)}</th>`).join('')}</tr>`).join('')}</tbody>`;
-    await yieldToBrowser();
     });
     whenNear(['formats'], async () => {
     $('format-choices').innerHTML = [['boxes','Bounding boxes','Detection labels'],['polygons','Instance polygons','Segmentation labels'],['provenance','Generation record','Traceable image metadata']].map(([k,t,d])=>`<button data-format="${k}" aria-pressed="${k==='boxes'}"><strong>${t}</strong><span>${d}</span></button>`).join('');
-    await yieldToBrowser();
     });
     citationText = `@unpublished{hoque${paper.year}icmarkingsynthetic,\n  title = {${paper.paper_title}},\n  author = {Hoque, Md Sami Ul and Kehtarnavaz, Nasser},\n  year = {${paper.year}},\n  note = {Manuscript under review}\n}`;
-    await yieldToBrowser();
     $('citation-text').textContent = citationText;
-    await yieldToBrowser();
     whenNear(['citation'], () => { $('attribution-table').innerHTML = sources.map(s=>`<tr><th scope="row"><a href="${esc(s.url)}" target="_blank" rel="noopener noreferrer">${esc(s.id)}</a></th><td>${esc(s.author)}</td><td><a href="${esc(s.license_url)}" target="_blank" rel="noopener noreferrer">${esc(s.license)}</a></td><td>${esc(s.modifications)} Synthetic capture and defects applied for this collection.</td></tr>`).join(''); });
-    await yieldToBrowser();
     $('reference-text').innerHTML = `[1] <a href="${esc(paper.reference_url)}" target="_blank" rel="noopener noreferrer">${esc(paper.reference)}</a>`;
-    await yieldToBrowser();
     $('build-date').textContent = 'Prepared ' + new Date(config.generated).toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'});
-    await yieldToBrowser();
     whenNear(['explore'], async () => { samples = await json('data/sample_index.json'); renderGrid(); }); showSplit('source_disjoint');
-    await yieldToBrowser();
-    await yieldToBrowser();
     await showHero('scratch');
     whenNear(['guidelines'], () => showStep(0));
     whenNear(['formats'], () => showFormat('boxes'));
     await setupInteractions();
-    await yieldToBrowser();
-    await yieldToBrowser();
     whenNear(['formats','access'], setupAccess);
-    await yieldToBrowser();
     document.body.dataset.ready = 'true';
     // Restore the requested section after asynchronous content changes page height.
     const initialSection = document.getElementById(location.hash.slice(1));
     if (initialSection) requestAnimationFrame(() => initialSection.scrollIntoView({behavior:'instant', block:'start'}));
-    await yieldToBrowser();
   }
   document.addEventListener('click',event=>{
     const button=event.target.closest('button'); if(!button) return;
