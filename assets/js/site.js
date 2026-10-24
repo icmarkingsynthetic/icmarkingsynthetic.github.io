@@ -303,6 +303,15 @@
     document.querySelector('#formats .shell').insertAdjacentHTML('beforeend',`<div class="package-guide"><h3>Inside the uploaded dataset archive</h3><div class="package-folders">${folders}</div><p>Top-level orientation, attribution, license, checksum, dataset-definition, and metadata files accompany these folders. The following documentation is read directly from the verified archive.</p>${docs}</div>`);
     document.querySelector('.request-details').insertAdjacentHTML('afterend',`<details class="package-guide"><summary>Generator contents, installation, and reproduction limits <span aria-hidden="true">+</span></summary><pre>${esc(release.code.readme)}</pre><pre>${esc(release.code.tested_platforms)}</pre></details>`);
   }
+  function whenNear(ids, work) {
+    let pending = true;
+    const observer = new IntersectionObserver(entries => {
+      if (pending && entries.some(entry => entry.isIntersecting)) {
+        pending = false; observer.disconnect(); work();
+      }
+    }, {rootMargin: '250px'});
+    ids.forEach(id => observer.observe($(id)));
+  }
   async function init() {
     const yieldToBrowser = () => new Promise(resolve => setTimeout(resolve, 0));
     [stats,samples,sources,summary,paper,config,release] = await Promise.all(['stats','sample_index','sources','sample_summary','paper','config','release'].map(name => json(`data/${name}.json`)));
@@ -342,20 +351,20 @@
     await yieldToBrowser();
     $('citation-text').textContent = citationText;
     await yieldToBrowser();
-    $('attribution-table').innerHTML = sources.map(s=>`<tr><th scope="row"><a href="${esc(s.url)}" target="_blank" rel="noopener noreferrer">${esc(s.id)}</a></th><td>${esc(s.author)}</td><td><a href="${esc(s.license_url)}" target="_blank" rel="noopener noreferrer">${esc(s.license)}</a></td><td>${esc(s.modifications)} Synthetic capture and defects applied for this collection.</td></tr>`).join('');
+    whenNear(['citation'], () => { $('attribution-table').innerHTML = sources.map(s=>`<tr><th scope="row"><a href="${esc(s.url)}" target="_blank" rel="noopener noreferrer">${esc(s.id)}</a></th><td>${esc(s.author)}</td><td><a href="${esc(s.license_url)}" target="_blank" rel="noopener noreferrer">${esc(s.license)}</a></td><td>${esc(s.modifications)} Synthetic capture and defects applied for this collection.</td></tr>`).join(''); });
     await yieldToBrowser();
     $('reference-text').innerHTML = `[1] <a href="${esc(paper.reference_url)}" target="_blank" rel="noopener noreferrer">${esc(paper.reference)}</a>`;
     await yieldToBrowser();
     $('build-date').textContent = 'Prepared ' + new Date(config.generated).toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'});
     await yieldToBrowser();
-    renderGrid(); showSplit('source_disjoint');
+    whenNear(['explore'], renderGrid); showSplit('source_disjoint');
     await yieldToBrowser();
     await yieldToBrowser();
     await Promise.all([showHero('scratch'),showStep(0),showFormat('boxes')]);
     await setupInteractions();
     await yieldToBrowser();
     await yieldToBrowser();
-    setupAccess();
+    whenNear(['formats','access'], setupAccess);
     await yieldToBrowser();
     document.body.dataset.ready = 'true';
     // Restore the requested section after asynchronous content changes page height.
