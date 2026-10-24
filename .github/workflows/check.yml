@@ -30,6 +30,7 @@ jobs:
         run: |
           python -m http.server 8878 --bind 127.0.0.1 >/tmp/site-server.log 2>&1 &
           npx --yes lighthouse@12.8.2 http://127.0.0.1:8878/ --chrome-flags="--headless --no-sandbox" --output=json --output=html --output-path=/tmp/site-audit --only-categories=performance,accessibility,best-practices --quiet
+          node -e "const r=require('/tmp/site-audit.report.json'); for(const k of ['first-contentful-paint','largest-contentful-paint','total-blocking-time','cumulative-layout-shift','speed-index']) console.log(k,r.audits[k].displayValue); console.log(JSON.stringify(r.audits['long-tasks'].details.items)); console.log(JSON.stringify(r.audits['largest-contentful-paint-element'].details));"
           node -e "const r=require('/tmp/site-audit.report.json'); for(const k of ['performance','accessibility','best-practices']) { console.log(k,100*r.categories[k].score); if(r.categories[k].score<=0.90) process.exitCode=1; }"
       - uses: actions/upload-artifact@v4
         if: always()

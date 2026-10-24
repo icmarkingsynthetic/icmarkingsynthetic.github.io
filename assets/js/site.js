@@ -8,6 +8,7 @@
   const order = Object.keys(names);
   const colors = {scratch:'#ffb859',contamination:'#6df1b8',missing_text:'#c8a5ff',smeared_text:'#62cafa'};
   const cache = new Map();
+  const displayPath = path => path.includes('/TVIC29_C000_') ? 'assets/display/' + path.split('/').pop().replace('.png', '.webp') : path;
   let stats, samples, sources, summary, paper, config, release, selectedClass = 'all', shown = 12, current = null, featured = null;
   let formatText = '', citationText = '';
   let heroRequest = 0, stepRequest = 0, viewerRequest = 0, currentStep = 0, tourTimer = null, comparisonFrame = null;
@@ -34,13 +35,13 @@
   async function showHero(label) {
     const request = ++heroRequest;
     featured = samples.find(s => s.group === 'TVIC29_C000' && s.label === label);
-    $('hero-image').src = featured.image;
+    $('hero-image').src = displayPath(featured.image);
     $('hero-image').alt = `${names[label]} release example on source ${featured.source}`;
     $('hero-group').textContent = featured.group;
     $('hero-class').textContent = names[label];
     $('hero-credit').innerHTML = credit(featured.source);
     document.querySelectorAll('[data-hero]').forEach(b => b.setAttribute('aria-pressed', b.dataset.hero === label));
-    if ($('hero-clean')) $('hero-clean').src = featured.counterpart;
+    if ($('hero-clean')) $('hero-clean').src = displayPath(featured.counterpart);
     const record = await detail(featured);
     if (request !== heroRequest) return;
     $('hero-overlay').innerHTML = annotations(record);
@@ -58,7 +59,7 @@
     const request = ++stepRequest;
     const [label,title,description,kind,source] = steps[index];
     const sample = samples.find(s => s.group === 'TVIC29_C000' && s.label === kind);
-    $('method-image').src = sample.image;
+    $('method-image').src = displayPath(sample.image);
     $('method-kicker').textContent = label;
     $('method-title').textContent = title;
     $('method-description').textContent = description;
