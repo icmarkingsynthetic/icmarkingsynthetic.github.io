@@ -1,0 +1,5 @@
+{
+  "private": true,
+  "scripts": {"build": "node tools/build_static.cjs"},
+  "devDependencies": {"jsdom": "30.1.3"}
+}

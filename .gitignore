@@ -3,6 +3,7 @@ __pycache__/
 screenshots/
 safety/release_before.json
 *.zip
+node_modules/
 .env
 .env.*
 

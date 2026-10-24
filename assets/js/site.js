@@ -366,5 +366,45 @@
   $('copy-citation').addEventListener('click',()=>copy(citationText));
   const menu=document.querySelector('.menu-toggle');menu.addEventListener('click',()=>{const open=menu.getAttribute('aria-expanded')!=='true';menu.setAttribute('aria-expanded',open);$('navigation').classList.toggle('open',open);});
   $('navigation').addEventListener('click',event=>{if(event.target.closest('a')){menu.setAttribute('aria-expanded','false');$('navigation').classList.remove('open');}});
-  init().catch(error=>{$('filter-count').textContent='The preview data could not be loaded. Please refresh from the local server.';console.error(error);});
+  async function hydrate() {
+    [stats,samples,sources,summary,paper,config,release] = await Promise.all(['stats','sample_index','sources','sample_summary','paper','config','release'].map(name=>json(`data/${name}.json`)));
+    featured=samples.find(s=>s.id==='TVIC29_C000_scratch');
+    formatText=$('format-content').textContent;
+    citationText=$('citation-text').textContent;
+    $('hero-reveal').addEventListener('input',()=>{stopComparison();updateHeroComparison();});
+    $('play-comparison').addEventListener('click',playComparison);
+    $('play-tour').addEventListener('click',()=>{
+      if(tourTimer!==null){stopTour();return;}
+      showStep(0);$('play-tour').textContent='Ⅱ Pause walkthrough';$('play-tour').setAttribute('aria-pressed','true');
+      tourTimer=setInterval(()=>{if(currentStep>=steps.length-1){stopTour();return;}showStep(currentStep+1);},5000);
+    });
+    $('image-search').addEventListener('input',()=>{shown=12;renderGrid();});
+    $('random-specimen').addEventListener('click',()=>{const list=filterSamples();if(list.length)openViewer(list[Math.floor(Math.random()*list.length)].id);});
+    $('previous-sample').addEventListener('click',()=>moveViewer(-1));
+    $('next-sample').addEventListener('click',()=>moveViewer(1));
+    $('viewer').addEventListener('keydown',event=>{if(/INPUT|SELECT|TEXTAREA/.test(event.target.tagName))return;if(event.key==='ArrowLeft'){event.preventDefault();moveViewer(-1);}if(event.key==='ArrowRight'){event.preventDefault();moveViewer(1);}});
+    ['chart-population','chart-metric','chart-order'].forEach(id=>$(id).addEventListener('change',renderChart));
+    $('copy-doi').addEventListener('click',()=>copy(config.zenodo_doi));
+    document.addEventListener('visibilitychange',()=>{if(document.hidden){stopTour();stopComparison();}});
+    reducedMotion.addEventListener('change',()=>{stopTour();stopComparison();});
+  }
+  if(document.body.dataset.prerender==='true') {
+    // Readable content is already present. Load interaction data on first intent.
+    let ready=false, starting;
+    const ensureReady=()=>starting||(starting=hydrate().then(()=>{ready=true;}).catch(error=>{starting=null;throw error;}));
+    const needsData=target=>target.closest('button,input,select')&&!target.closest('.menu-toggle');
+    for(const type of ['pointerover','focusin']) document.addEventListener(type,event=>{
+      if(!ready&&needsData(event.target))ensureReady().catch(console.error);
+    },{passive:true});
+    for(const type of ['click','input','change']) document.addEventListener(type,async event=>{
+      if(ready||!needsData(event.target))return;
+      const target=event.target;
+      event.preventDefault();event.stopImmediatePropagation();
+      target.setAttribute('aria-busy','true');
+      try {await ensureReady();target.removeAttribute('aria-busy');target.dispatchEvent(new Event(type,{bubbles:true}));}
+      catch(error){target.removeAttribute('aria-busy');$('toast').textContent='Unable to load controls. Please try again.';$('toast').classList.add('visible');console.error(error);}
+    },true);
+  } else {
+    init().catch(error=>{$('filter-count').textContent='The preview data could not be loaded. Please refresh from the local server.';console.error(error);});
+  }
 })();

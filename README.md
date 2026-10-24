@@ -28,7 +28,8 @@ The tools read external inputs but write only within the preview folder. Supply 
 2. `python tools/export_samples.py --release <release> --records <records-jsonl> --output .`
 3. `python tools/prepare_content.py --paper <final-manuscript-docx> --output .`
 4. `python tools/build_release_info.py --dataset <dataset-zip> --code <generator-zip> --output data/release.json`
-5. `python tools/verify_preview.py --site . --release <release> --records <records-jsonl>`
+5. `npm install --ignore-scripts` then `npm run build`. This renders `index.template.html` from the same data files and display functions, using the pinned jsdom development dependency. No browser or remote data service is used by the build.
+6. `python tools/verify_preview.py --site . --release <release> --records <records-jsonl>`
 
 Run the archive-information export before verification when either archive changes. The email button opens a message template in the visitor's email app. It does not submit a request, grant access, or automatically send files.
 
@@ -38,7 +39,7 @@ Local screenshots, the original-release hash ledger, Python caches, environment 
 
 ## Input integrity and rights
 
-Sample PNG pixel arrays are checked against their release originals. Embedded metadata is removed without changing the image pixels. Thumbnails are smaller display derivatives. No real reference images, crops, masks, or overlays are included. A full content-hash ledger checks that the original release is unchanged.
+Sample PNG pixel arrays are checked against their release originals. Embedded metadata is removed without changing the image pixels. Thumbnails are smaller display derivatives, used for the opening comparison and gallery. Opening a specimen displays original-resolution PNGs. Readable page content is prebuilt; interactive controls load their data on first interaction. No real reference images, crops, masks, or overlays are included. A full content-hash ledger checks that the original release is unchanged.
 
 Every sample displays the original creator and license. The attributions section also records source modifications. The website does not relabel source images as public domain.
 
