@@ -8,7 +8,7 @@
   const order = Object.keys(names);
   const colors = {scratch:'#ffb859',contamination:'#6df1b8',missing_text:'#c8a5ff',smeared_text:'#62cafa'};
   const cache = new Map();
-  const displayPath = path => path.includes('/TVIC29_C000_') ? 'assets/display/' + path.split('/').pop().replace('.png', '.webp') : path;
+  const displayPath = path => path.includes('/TVIC29_C000_') ? 'samples/thumbnails/' + path.split('/').pop().replace('.png', '.webp') : path;
   let stats, samples, sources, summary, paper, config, release, selectedClass = 'all', shown = 12, current = null, featured = null;
   let formatText = '', citationText = '';
   let heroRequest = 0, stepRequest = 0, viewerRequest = 0, currentStep = 0, tourTimer = null, comparisonFrame = null;
