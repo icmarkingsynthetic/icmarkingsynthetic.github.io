@@ -35,13 +35,13 @@
   async function showHero(label) {
     const request = ++heroRequest;
     featured = samples.find(s => s.group === 'TVIC29_C000' && s.label === label);
-    $('hero-image').src = displayPath(featured.image);
+    if ($('hero-image').getAttribute('src') !== displayPath(featured.image)) $('hero-image').src = displayPath(featured.image);
     $('hero-image').alt = `${names[label]} release example on source ${featured.source}`;
     $('hero-group').textContent = featured.group;
     $('hero-class').textContent = names[label];
     $('hero-credit').innerHTML = credit(featured.source);
     document.querySelectorAll('[data-hero]').forEach(b => b.setAttribute('aria-pressed', b.dataset.hero === label));
-    if ($('hero-clean')) $('hero-clean').src = displayPath(featured.counterpart);
+    if ($('hero-clean') && $('hero-clean').getAttribute('src') !== displayPath(featured.counterpart)) $('hero-clean').src = displayPath(featured.counterpart);
     const record = await detail(featured);
     if (request !== heroRequest) return;
     $('hero-overlay').innerHTML = annotations(record);
@@ -255,11 +255,18 @@
     const updatePosition=()=>{
       scrollFrame=null;const available=document.documentElement.scrollHeight-innerHeight;
       $('reading-progress-fill').style.transform=`scaleX(${available>0?scrollY/available:0})`;
-      let active=null;for(const link of navigation){const section=document.querySelector(link.getAttribute('href'));if(section&&section.getBoundingClientRect().top<=170)active=link;}
-      navigation.forEach(link=>{if(link===active)link.setAttribute('aria-current','location');else link.removeAttribute('aria-current');});
     };
     await yieldToBrowser();
-    addEventListener('scroll',()=>{if(scrollFrame===null)scrollFrame=requestAnimationFrame(updatePosition);},{passive:true});updatePosition();
+    addEventListener('scroll',()=>{if(scrollFrame===null)scrollFrame=requestAnimationFrame(updatePosition);},{passive:true});
+    const sectionObserver = new IntersectionObserver(entries => {
+      for (const entry of entries) if (entry.isIntersecting) {
+        navigation.forEach(link => {
+          if (link.getAttribute('href') === '#' + entry.target.id) link.setAttribute('aria-current','location');
+          else link.removeAttribute('aria-current');
+        });
+      }
+    }, {rootMargin:'-10% 0px -70% 0px'});
+    navigation.forEach(link => {const section=document.querySelector(link.getAttribute('href'));if(section)sectionObserver.observe(section);});
     await yieldToBrowser();
     if(!reducedMotion.matches){const observer=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('is-revealed');observer.unobserve(entry.target);}}),{threshold:0.06});document.querySelectorAll('.section-heading,.cause-grid article,.evidence-cards article').forEach(element=>{element.classList.add('reveal-item');observer.observe(element);});}
     document.addEventListener('visibilitychange',()=>{if(document.hidden){stopTour();stopComparison();}});
