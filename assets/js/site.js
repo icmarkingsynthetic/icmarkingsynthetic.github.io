@@ -314,7 +314,7 @@
   }
   async function init() {
     const yieldToBrowser = () => new Promise(resolve => setTimeout(resolve, 0));
-    [stats,samples,sources,summary,paper,config,release] = await Promise.all(['stats','sample_index','sources','sample_summary','paper','config','release'].map(name => json(`data/${name}.json`)));
+    [stats,samples,sources,summary,paper,config,release] = await Promise.all(['stats','featured','sources','sample_summary','paper','config','release'].map(name => json(`data/${name}.json`)));
     const measures = [[stats.images,'synthetic images'],[stats.image_classes,'image classes'],[stats.defect_types,'defect types'],[stats.sources,'source images'],[stats.visible_instances,'visible instances']];
     await yieldToBrowser();
     $('key-metrics').innerHTML = measures.map(([value,label]) => `<div class="metric"><strong>${number(value)}</strong><span>${label}</span></div>`).join('');
@@ -357,7 +357,7 @@
     await yieldToBrowser();
     $('build-date').textContent = 'Prepared ' + new Date(config.generated).toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'});
     await yieldToBrowser();
-    whenNear(['explore'], renderGrid); showSplit('source_disjoint');
+    whenNear(['explore'], async () => { samples = await json('data/sample_index.json'); renderGrid(); }); showSplit('source_disjoint');
     await yieldToBrowser();
     await yieldToBrowser();
     await Promise.all([showHero('scratch'),showStep(0),showFormat('boxes')]);

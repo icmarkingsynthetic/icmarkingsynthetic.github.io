@@ -90,6 +90,7 @@ def main():
                       "image": image, "thumb": thumb.as_posix(), "mask": mask.as_posix(),
                       "counterpart": counterpart, "detail": detail.as_posix()})
     dump(output / "data" / "sample_index.json", index)
+    dump(output / "data" / "featured.json", [r for r in index if r["group"] == "TVIC29_C000"])
     (output / "samples" / "provenance" / "records.jsonl").write_text("\n".join(json.dumps(r, ensure_ascii=False) for r in records) + "\n", encoding="utf-8")
     dump(output / "data" / "sample_summary.json", {"sample_images": len(index), "class_counts": dict(Counter(r["label"] for r in index)),
          "source_count": len({r["source"] for r in index}), "supporting_clean_images": len(exported) - len(index),
