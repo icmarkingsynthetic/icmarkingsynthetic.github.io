@@ -83,7 +83,7 @@
   function renderGrid() {
     const result = filterSamples();
     $('filter-count').textContent = `${number(result.length)} specimens · showing ${number(Math.min(shown,result.length))}`;
-    $('sample-grid').innerHTML = result.length ? result.slice(0,shown).map(s => `<article class="sample-card"><button data-open="${esc(s.id)}" aria-label="Inspect ${names[s.label]}, ${esc(s.id)}"><div class="card-image"><img src="${esc(s.thumb)}" width="480" height="240" loading="lazy" alt="${names[s.label]} on IC source ${esc(s.source)}"><span class="card-arrow" aria-hidden="true">↗</span></div><div class="card-info"><div class="card-label-row"><strong>${names[s.label]}</strong><span class="severity-pill">${esc([...new Set(s.severity)].join(' / ') || 'clean')}</span></div><span class="card-id mono">${esc(s.id)}</span></div></button><p class="image-credit">${credit(s.source)}</p></article>`).join('') : '<p class="empty-state">No samples match these filters. Try another source or severity level.</p>';
+    $('sample-grid').innerHTML = result.length ? result.slice(0,shown).map(s => `<article class="sample-card"><button data-open="${esc(s.id)}"><div class="card-image"><img src="${esc(s.thumb)}" width="480" height="240" loading="lazy" alt="${names[s.label]} on IC source ${esc(s.source)}"><span class="card-arrow" aria-hidden="true">↗</span></div><div class="card-info"><div class="card-label-row"><strong>${names[s.label]}</strong><span class="severity-pill">${esc([...new Set(s.severity)].join(' / ') || 'clean')}</span></div><span class="card-id mono">${esc(s.id)}</span></div></button><p class="image-credit">${credit(s.source)}</p></article>`).join('') : '<p class="empty-state">No samples match these filters. Try another source or severity level.</p>';
     $('load-more').hidden = shown >= result.length;
     if ($('random-specimen')) $('random-specimen').disabled = result.length === 0;
   }
@@ -206,8 +206,8 @@
     document.querySelectorAll('.chart-row').forEach(b=>b.setAttribute('aria-pressed',b.dataset.chartMethod===method));
   }
   function setupInteractions() {
-    const clean=document.createElement('img');clean.id='hero-clean';clean.src=featured.counterpart;clean.alt='Exact defect-free counterpart for the featured example';clean.width=640;clean.height=320;
-    document.querySelector('.specimen-image').prepend(clean);
+    // The initial clean image is present in HTML so it can load immediately.
+    // Existing image elements are reused when selecting another specimen.
     document.querySelector('.specimen-image').insertAdjacentHTML('beforeend','<span id="hero-divider" class="comparison-divider" aria-hidden="true"><span>↔</span></span>');
     document.querySelector('.specimen-tabs').innerHTML=order.map(kind=>`<button data-hero="${kind}" aria-pressed="${kind===featured.label}">${names[kind]}</button>`).join('');
     $('hero-credit').insertAdjacentHTML('beforebegin','<div class="hero-comparison"><label for="hero-reveal"><span>Clean counterpart</span><span>Synthetic image</span></label><input id="hero-reveal" type="range" min="0" max="100" value="65" aria-label="Compare the featured image with its clean counterpart"><div class="comparison-help"><button id="play-comparison" class="text-button" aria-pressed="false">▶ Play comparison</button><span>Drag to reveal the defect</span></div></div>');
@@ -280,10 +280,12 @@
     document.querySelector('.request-details').insertAdjacentHTML('afterend',`<details class="package-guide"><summary>Generator contents, installation, and reproduction limits <span aria-hidden="true">+</span></summary><pre>${esc(release.code.readme)}</pre><pre>${esc(release.code.tested_platforms)}</pre></details>`);
   }
   async function init() {
+    const yieldToBrowser = () => new Promise(resolve => setTimeout(resolve, 0));
     [stats,samples,sources,summary,paper,config,release] = await Promise.all(['stats','sample_index','sources','sample_summary','paper','config','release'].map(name => json(`data/${name}.json`)));
     const measures = [[stats.images,'synthetic images'],[stats.image_classes,'image classes'],[stats.defect_types,'defect types'],[stats.sources,'source images'],[stats.visible_instances,'visible instances']];
     $('key-metrics').innerHTML = measures.map(([value,label]) => `<div class="metric"><strong>${number(value)}</strong><span>${label}</span></div>`).join('');
     $('pipeline').innerHTML = steps.map((s,i) => `<button data-step="${i}" aria-pressed="${i===0}"><span>${String(i+1).padStart(2,'0')}</span>${s[0]}</button>`).join('');
+    await yieldToBrowser();
     $('explore-intro').textContent = `A traceable sample of ${number(summary.sample_images)} release images, ${number(summary.class_counts.good)} per class. Inspect the clean counterpart and annotations without downloading an archive.`;
     $('class-filters').innerHTML = [['all','All images'],...order.map(k => [k,names[k]])].map(([key,label]) => `<button data-class="${key}" aria-pressed="${key==='all'}">${label}</button>`).join('');
     $('filter-source').innerHTML += sources.map(s => `<option value="${esc(s.id)}">${esc(s.id)}</option>`).join('');
@@ -291,6 +293,7 @@
     $('group-strip').innerHTML = order.map(kind => { const s=samples.find(s=>s.group==='TVIC29_C000'&&s.label===kind); return `<div><button data-open="${s.id}" aria-label="Inspect ${names[kind]} example"><img src="${s.thumb}" width="480" height="240" loading="lazy" alt="${names[kind]} example from the same capture"><span>${names[kind]}</span></button><p class="image-credit">${credit(s.source)}</p></div>`; }).join('');
     $('composition').innerHTML = stats.classes.map(c => `<tr><th scope="row">${names[c.label]}</th><td>${number(c.images)}</td><td>${number(c.instances)}</td></tr>`).join('');
     $('supplement-copy').textContent = `${number(stats.capture_groups)} capture groups connect the balanced collection. A separate ${number(stats.cosmetic_images)}-image cosmetic supplement is not part of the ${number(stats.images)} images. The archive includes ${number(release.counterparts)} auxiliary clean counterparts recovered from the original captures. The viewer always uses the matching stored counterpart, not an approximate regeneration.`;
+    await yieldToBrowser();
     $('inspector-result').textContent = paper.inspector_adapted + '%';
     $('inspector-description').textContent = `On the synthetic test split, with thresholds fitted on synthetic validation images. Published thresholds yield ${paper.inspector_published}% in the manuscript.`;
     $('transfer-result').innerHTML = `${esc(paper.transfer[0][2])}<small> / ${esc(paper.transfer_headers[2].split('/')[1].trim())}</small>`;
@@ -302,8 +305,10 @@
     $('reference-text').innerHTML = `[1] <a href="${esc(paper.reference_url)}" target="_blank" rel="noopener noreferrer">${esc(paper.reference)}</a>`;
     $('build-date').textContent = 'Prepared ' + new Date(config.generated).toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'});
     renderGrid(); showSplit('source_disjoint');
+    await yieldToBrowser();
     await Promise.all([showHero('scratch'),showStep(0),showFormat('boxes')]);
     setupInteractions();
+    await yieldToBrowser();
     setupAccess();
     document.body.dataset.ready = 'true';
     // Restore the requested section after asynchronous content changes page height.
